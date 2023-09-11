@@ -128,13 +128,12 @@ public class EmulatorCreatorApplication extends JFrame {
 
     //Engine
 
-    private static final String AWDMANAGER_PATH = "C:/Users/chemy/AppData/Local/Android/Sdk" +
+    private static final String AWDMANAGER_PATH = "C:/Users/{username}/AppData/Local/Android/Sdk" +
             "/tools/bin/avdmanager.bat";
-    private static final String SDKMANAGER_PATH = "C:/Users/chemy/AppData/Local/Android/Sdk" +
+    private static final String SDKMANAGER_PATH = "C:/Users/username/AppData/Local/Android/Sdk" +
             "/tools/bin/sdkmanager.bat";
-    private static final String EMULATOR_PATH = "C:/Users/chemy/AppData/Local/Android/Sdk" +
+    private static final String EMULATOR_PATH = "C:/Users/username/AppData/Local/Android/Sdk" +
             "/emulator/emulator.exe";
-
 
     private void executeCommand() {
         int numOfEmulators = Integer.parseInt(quantityTextField.getText());
@@ -188,6 +187,7 @@ public class EmulatorCreatorApplication extends JFrame {
                 case "screen -active":
                     launchEmulatorCommand = EMULATOR_PATH +
                             " -avd " + emulatorName +
+                            " -scale 0.5" +
                             " -port " + port;
                     break;
                 case "screen -off":

@@ -1,27 +1,20 @@
-### Тестовое задание на разработку отдельного приложения
-#### Описание задачи: 
-* Необходимо разработать программу утилиту, которая способна создавать андройд эмулятор с заданными параметрами.
-* Программа должна быть реализована как консольное приложение.
-* Дополнительным плюсом будет графический интерфейс(но это требования не обязательное).
-* Утилита должна способна создавать и поднимать N эмуляторов.
-* Пример работы программы: создать 2 эмулятора с версией Android API 30, разрядностью x86_64.
-* Иметь образ телефона Pixel 3a.
-* После создания и поднятия эмуляторов возвращает список адресов устройств в виде: “127.0.0.1:5554, 127.0.0.1:5556”.
+#### Task description:
+* It is necessary to develop a utility program that is capable of creating an Android emulator with the specified parameters.
+* The program must be implemented with graphical interface.
+* The utility must be able to create and install N emulators.
+* 
+* **Example of how the program works**: 
+* Create 2 emulators with Android API version 30, x86_64 bit depth.
+* Have an image of a Pixel 3a phone.
+* After creating and raising emulators, it returns a list of device addresses in the form: “127.0.0.1:5554, 127.0.0.1:5556”.
 
-#### Требования:
-* Если отсутствует нужный образ эмулятора, программа самостоятельно его скачивает из интернета
-* Достаточно одного образа устройства(Pixel 3a, Nexus 5)
-* Образ устройства обязательно должен иметь поддержку Google Play
-* Программа способна поднять N эмуляторов, N задается как параметр 
-* Программа должна позволять создавать эмуляторы с версией 22 < API < 33 
-* Выходной результат программы: N работающих эмуляторов, список поднятых устройств
+#### Requirements:
+* If the required emulator image is missing, the program independently **downloads** it from the Internet
+* The device image must have **Google Play support**
+* The program is capable of raising N emulators, N is specified as a **parameter**
+* The program should allow you to create emulators with version 22 < API < 33
+* Emulators screen should have **screen -off** mode
+* Output of the program: N running emulators, list of installed devices
+* Development language **java 8**.
 
-Поднятие эмулятора должно сопровождаться флагами, необходимыми для установки, запуска приложения и получения результатов с устройства
-
-Для использования программы на устройстве необходимо наличие установленной android studio(AVD, ADB, platform-tools), jre 8+
-
-Результат работы представить в виде консольного приложения, код программы расположить в репозитории.
-
-Язык разработки java/kotlin.
-
-Возможно использование bash команд
+![launcher window](https://github.com/chemyl/android_emulator_launcher/raw/master/src/main/resources/screen1.png)
