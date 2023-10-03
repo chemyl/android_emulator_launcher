@@ -23,11 +23,11 @@ sdkmanager --list
 sdkmanager --install system-images;android-30;google_apis_playstore;x86_64
 
 _AVDMANGER_
-avdmanager list devices	==> All possible devices with cyrrent Android SDK
-avdmanager list target 	==> Available Android platforms (downloaded and ready to use)
-avdmanager list avd		==> Active virtual devices
-avdmanager create avd --name MyPixel6Emulator --package "system-images;android-30;google_apis_playstore;x86_64" --device "Nexus_6.1" --tag "google_apis_playstore" --abi "x86_64" --force
-avdmanager delete avd --name Nexus_6.1
+- avdmanager list devices	==> All possible devices with cyrrent Android SDK
+- avdmanager list target 	==> Available Android platforms (downloaded and ready to use)
+- avdmanager list avd		==> Active virtual devices
+- avdmanager create avd --name MyPixel6Emulator --package "system-images;android-30;google_apis_playstore;x86_64" --device "Nexus_6.1" --tag "google_apis_playstore" --abi "x86_64" --force
+- avdmanager delete avd --name Nexus_6.1
 
 _EMULATOR_
 emulator -list-avds
