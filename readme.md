@@ -2,7 +2,7 @@
 * It is necessary to develop a utility program that is capable of creating an Android emulator with the specified parameters.
 * The program must be implemented with graphical interface.
 * The utility must be able to create and install N emulators.
-* 
+  
 #### Example of how the program works: 
 * Create 2 emulators with Android API version 30, x86_64 bit depth.
 * Have an image of a Pixel 3a phone.
