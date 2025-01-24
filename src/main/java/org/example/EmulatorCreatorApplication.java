@@ -1,20 +1,21 @@
 package org.example;
 
 import lombok.SneakyThrows;
-import lombok.extern.log4j.Log4j;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-@Log4j
 public class EmulatorCreatorApplication extends JFrame {
-
+    private static final Logger log = LogManager.getLogger(EmulatorCreatorApplication.class);
     private JComboBox<String> bitDepthComboBox;
     private JComboBox<String> windowsComboBox;
     private JComboBox<String> phoneModelComboBox;
@@ -87,7 +88,13 @@ public class EmulatorCreatorApplication extends JFrame {
 
         JButton executeButton = new JButton("Run emulators");
         executeButton.addActionListener(e -> {
-            executeCommand();
+            try {
+                executeCommand();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
             executeButton.setEnabled(false);
         });
 
@@ -135,7 +142,7 @@ public class EmulatorCreatorApplication extends JFrame {
     private static final String EMULATOR_PATH = "C:/Users/username/AppData/Local/Android/Sdk" +
             "/emulator/emulator.exe";
 
-    private void executeCommand() {
+    private void executeCommand() throws IOException, InterruptedException {
         int numOfEmulators = Integer.parseInt(quantityTextField.getText());
         String bitDepth = Objects.requireNonNull(bitDepthComboBox.getSelectedItem()).toString();
         String windowsEnabled = Objects.requireNonNull(windowsComboBox.getSelectedItem()).toString();
@@ -165,7 +172,7 @@ public class EmulatorCreatorApplication extends JFrame {
 
     @SneakyThrows
     public List<String> createEmulators(int numOfEmulators, String deviceName, String abi, String deviceImage,
-                                        String googleServices, String windowType) {
+                                        String googleServices, String windowType) throws IOException, InterruptedException {
         List<String> emulatorAddresses = new ArrayList<>();
         if (!isDevicePackagesInstalled(deviceImage)) {
             downloadAndInstallDevicePackages(deviceImage);
@@ -200,9 +207,28 @@ public class EmulatorCreatorApplication extends JFrame {
                             "-no-window";
                     break;
             }
-            executeBashCommand(createAVDCommand);
+            try {
+                executeBashCommand(createAVDCommand);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
+            try {
+                executeBashCommand(createAVDCommand);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
             if (launching) {
-                executeBashCommand(launchEmulatorCommand);
+                try {
+                    executeBashCommand(launchEmulatorCommand);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
             emulatorAddresses.add("127.0.0.1:" + port);
         }
@@ -212,7 +238,14 @@ public class EmulatorCreatorApplication extends JFrame {
     @SneakyThrows
     public boolean isDevicePackagesInstalled(String deviceImage) {
         String listCmd = SDKMANAGER_PATH + " --list";
-        String output = executeBashCommand(listCmd);
+        String output;
+        try {
+            output = executeBashCommand(listCmd);
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        } catch (InterruptedException ex) {
+            throw new RuntimeException(ex);
+        }
         String extracted = null;
 
         int startIndex = output.indexOf("Installed packages:");
@@ -231,11 +264,16 @@ public class EmulatorCreatorApplication extends JFrame {
     public void downloadAndInstallDevicePackages(String deviceImage) {
         String downloadCommand = SDKMANAGER_PATH + " --install " + deviceImage;
         System.out.println("New image => " + deviceImage + " downloading....");
-        executeBashCommand(downloadCommand);
+        try {
+            executeBashCommand(downloadCommand);
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        } catch (InterruptedException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
-    @SneakyThrows
-    public String executeBashCommand(String command) {
+    public String executeBashCommand(String command) throws IOException, InterruptedException {
         log.debug(command);
         ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", command);
         if (command.contains("emulator")) {
