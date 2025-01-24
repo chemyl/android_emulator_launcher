@@ -18,4 +18,8 @@
 `EMULATOR`
 `ADB`
 
+### Use Case:
+1. Update path to avdmanager, sdkmanager, emulator
+2. Run Application
+
 ![launcher window](https://github.com/chemyl/android_emulator_launcher/raw/master/src/main/resources/screen1.png)
